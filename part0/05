@@ -1,0 +1,29 @@
+```mermaid
+ sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Loads SPA page
+    Browser->>Server: GET /exampleapp/spa
+    Server-->>Browser: HTML file
+
+    Browser->>Server: GET /exampleapp/main.css
+    Server-->>Browser: CSS file
+
+    Browser->>Server: GET /exampleapp/spa.js
+    Server-->>Browser: JavaScript file
+
+    Note right of Browser: JavaScript runs and fetches notes
+
+    Browser->>Server: GET /exampleapp/data.json
+    Server-->>Browser: JSON with notes
+
+    Browser->>Browser: Render notes using DOM
+
+    User->>Browser: Submits new note via form
+    Browser->>Browser: Prevent default form submission
+    Browser->>Browser: Add note to local array and re-render
+    Browser->>Server: POST /exampleapp/new_note_spa with JSON note
+    Server-->>Browser: 201 Created (confirmation) 
+```
